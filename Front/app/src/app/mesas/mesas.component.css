@@ -1,0 +1,61 @@
+/* mesas.component.css */
+.container {
+  max-width: 50%;
+}
+
+.cuadricula {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 0;
+}
+.fila {
+  display: contents;
+}
+
+.elemento-invisible {
+  visibility: hidden;
+}
+
+.mesa {
+  position: relative; /* Agrega posición relativa para que el padding sea relativo a este elemento */
+  border: 1px solid #ccc;
+  user-select: none;
+}
+.mesa:hover {
+  background-color: #d0f5e4;
+}
+
+.mesa .mesaInterior {
+  height: 0;
+
+  padding-bottom: 100%; /* Relación de aspecto cuadrada (altura igual al ancho) */
+}
+
+.card-body {
+  position: absolute; /* Permite posicionar el contenido dentro del contenedor de manera absoluta */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ExisteMesa {
+  background-color: #198754 !important;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+}
+.ExisteMesa:hover {
+  background-color: #e22626 !important;
+  cursor: pointer;
+}
+.OcupadaMesa {
+  background-color: #d49432 !important;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+}
+.form-name {
+  background-color: transparent;
+  color: white;
+}

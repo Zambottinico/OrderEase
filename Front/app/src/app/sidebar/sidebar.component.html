@@ -1,0 +1,61 @@
+{{ id }}
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <label for="titleInmput" class="col-form-label"
+        >Cantidad de personas</label
+      >
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <input
+            type="button"
+            value="+"
+            class="btn btn-primary"
+            (click)="addPeople(1)"
+          />
+        </div>
+        <div class="col-6">
+          <input
+            type="number"
+            class="form-control form-name mr-3 ml-3"
+            id="PeopleInput"
+            formControlName="people"
+            min="1"
+            [ngClass]="{
+              'is-invalid': form.get('people')?.invalid,
+              'is-valid': form.get('people')?.valid
+            }"
+          />
+        </div>
+        <div class="col-3">
+          <input
+            type="button"
+            value="-"
+            class="btn btn-primary"
+            (click)="addPeople(-1)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <div class="col-12">
+      <select
+        class="form-select"
+        formControlName="client"
+        [ngClass]="{
+          'is-invalid':
+            form.get('client')?.invalid && form.get('client')?.touched,
+          'is-valid': form.get('client')?.valid && form.get('client')?.touched
+        }"
+      >
+        <option class="form-control" value="1">consumidor final</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <div class="col-12">
+      <input type="submit" value="Abrir Mesa" class="btn btn-success" />
+    </div>
+  </div>
+</form>

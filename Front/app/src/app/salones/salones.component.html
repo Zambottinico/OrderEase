@@ -1,0 +1,68 @@
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+>
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Nombre restaurant</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <app-sidebar [id]="idLastTableTouched"></app-sidebar>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <ul class="nav nav-tabs">
+      <div>
+        <ul class="nav nav-tabs">
+          <li class="nav-item" *ngFor="let salon of restaurant.salones">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              [routerLink]="['/Salones/', salon.id]"
+              (click)="seleccionarSalon(salon)"
+            >
+              {{ salon.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </ul>
+
+    <div class="container">
+      <div class="cuadricula">
+        <div
+          *ngFor="let fila of salon.tableroDeMesas; let i = index"
+          class="fila"
+        >
+          <div *ngFor="let mesa of fila; let j = index" class="mesa">
+            <div class="mesaInterior" (click)="SeleccionarMesa(i, j)">
+              <div
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+                class="card-body"
+                [ngClass]="{
+                  ExisteMesa: mesa.state === DiningTableState.OPEN,
+                  'elemento-invisible':
+                    mesa.state === DiningTableState.NOT_EXIST,
+                  OcupadaMesa: mesa.state === DiningTableState.OCCUPIED
+                }"
+              >
+                <h5 class="card-title">{{ mesa.id }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
