@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MesasService } from '../mesas.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,11 +25,17 @@ export class SidebarComponent {
         ?.setValue(this.form.get('people')?.value + people);
     }
   }
-  onSubmit() {}
+  onSubmit() {
+    let rta = this.mesasService.occupyTable(this.form, this.idLounge, this.id);
+    rta.subscribe((data) => {
+      console.log(data);
+    });
+  }
   form: FormGroup<any>;
   @Input() id: number;
+  @Input() idLounge: number;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private mesasService: MesasService) {
     this.form = this.fb.group({
       people: [1, [Validators.required, Validators.min(1)]],
       client: ['', [Validators.required]],

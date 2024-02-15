@@ -63,6 +63,7 @@ export class MesasComponent {
     let idSalonNew = this.mesasService.agregarSalon();
     this.id = this.route.snapshot.params['id'];
     this.restaurant = this.mesasService.getRestaurant();
+    this.salon = this.mesasService.getMesas(this.id);
     //this.routerTP.navigate(['/EditarSalon/' + idSalonNew]);
   }
 

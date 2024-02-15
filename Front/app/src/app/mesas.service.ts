@@ -5,6 +5,8 @@ import { Salon } from './models/Salon';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EditarSalonDto } from './models/EditarSalonDto';
+import { FormGroup } from '@angular/forms';
+import { OcuppyTableDto } from './models/OcuppyTableDto';
 
 @Injectable({
   providedIn: 'root',
@@ -79,5 +81,19 @@ export class MesasService {
     return xd;
 
     return null;
+  }
+
+  occupyTable(
+    form: FormGroup,
+    idLounge: number,
+    idTable: number
+  ): Observable<any> {
+    let dto: OcuppyTableDto = new OcuppyTableDto();
+    dto.idClient = parseInt(form.value.client);
+    dto.people = form.value.people;
+    dto.idLounge = idLounge;
+    dto.id = idTable;
+    console.log(dto);
+    return this.http.post('http://localhost:8086/diningTable/Edit/', dto);
   }
 }

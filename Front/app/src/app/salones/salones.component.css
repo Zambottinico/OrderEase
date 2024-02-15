@@ -53,3 +53,7 @@
   background-color: #e22626 !important;
   cursor: pointer;
 }
+.OcupadaMesa:hover {
+  background-color: #e74949 !important;
+  cursor: pointer;
+}
