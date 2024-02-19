@@ -68,9 +68,14 @@ export class MesasComponent {
   }
 
   agregarMesa(i: number, j: number) {
-    if (this.salon.tableroDeMesas[i][j].state !== DiningTableState.OPEN) {
+    if (
+      this.salon.tableroDeMesas[i][j].state !== DiningTableState.OPEN &&
+      this.salon.tableroDeMesas[i][j].state !== DiningTableState.OCCUPIED
+    ) {
       this.salon.tableroDeMesas[i][j].state = DiningTableState.OPEN;
-    } else {
+    } else if (
+      this.salon.tableroDeMesas[i][j].state !== DiningTableState.OCCUPIED
+    ) {
       this.salon.tableroDeMesas[i][j].state = DiningTableState.NOT_EXIST;
     }
 

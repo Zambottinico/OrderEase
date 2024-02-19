@@ -50,10 +50,10 @@
   color: rgb(255, 255, 255);
   border-radius: 4px;
   border: 1px solid white;
-  background-color: #e22626 !important;
+  background-color: #d49432 !important;
   cursor: pointer;
 }
 .OcupadaMesa:hover {
-  background-color: #e74949 !important;
+  background-color: #ebcf35 !important;
   cursor: pointer;
 }

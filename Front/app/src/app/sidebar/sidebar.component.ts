@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,6 +16,7 @@ import { MesasService } from '../mesas.service';
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
+  @Output() emiter = new EventEmitter();
   addPeople(people: number) {
     if (people === -1 && this.form.get('people')?.value === 1) {
       this.form.get('people')?.setValue(1);
@@ -28,7 +29,10 @@ export class SidebarComponent {
   onSubmit() {
     let rta = this.mesasService.occupyTable(this.form, this.idLounge, this.id);
     rta.subscribe((data) => {
-      console.log(data);
+      if (data) {
+        console.log('Respuesta:' + data);
+        this.emiter.emit(this.id);
+      }
     });
   }
   form: FormGroup<any>;

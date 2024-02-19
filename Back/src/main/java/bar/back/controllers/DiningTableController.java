@@ -16,7 +16,7 @@ public class DiningTableController {
     private DiningTableService diningTableService;
 
     @PutMapping("diningTable/Edit/")
-    public ResponseEntity<Boolean> occupyTable(@RequestBody OccupyTableDto dto) throws JsonProcessingException {
+    public ResponseEntity<Boolean> occupyTable(@RequestBody OccupyTableDto dto){
         return ResponseEntity.ok(diningTableService.occupyTable(dto));
     }
 }

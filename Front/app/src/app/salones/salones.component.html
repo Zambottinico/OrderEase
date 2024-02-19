@@ -14,7 +14,14 @@
     ></button>
   </div>
   <div class="offcanvas-body">
-    <app-sidebar [id]="idLastTableTouched" [idLounge]="id"></app-sidebar>
+    @if (lastTableTouchesIsOpen) {<app-sidebar
+      [id]="idLastTableTouched"
+      [idLounge]="id"
+      (emiter)="onEmiter($event)"
+    ></app-sidebar
+    >} @else {
+    <app-pedido [id]="idLastTableTouched" [idLounge]="id"></app-pedido>
+    }
   </div>
 </div>
 

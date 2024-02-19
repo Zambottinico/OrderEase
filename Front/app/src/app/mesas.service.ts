@@ -79,8 +79,6 @@ export class MesasService {
       this.restaurant.salones = data;
     });
     return xd;
-
-    return null;
   }
 
   occupyTable(
@@ -94,6 +92,7 @@ export class MesasService {
     dto.idLounge = idLounge;
     dto.id = idTable;
     console.log(dto);
-    return this.http.post('http://localhost:8086/diningTable/Edit/', dto);
+    let rta = this.http.put('http://localhost:8086/diningTable/Edit/', dto);
+    return rta;
   }
 }
