@@ -59,3 +59,35 @@
   background-color: transparent;
   color: rgb(0, 0, 0);
 }
+
+.btn-agregar {
+  cursor: pointer;
+  user-select: none;
+}
+@media screen and (max-width: 1000px) {
+  .container {
+    max-width: 95%;
+  }
+}
+
+.main {
+  display: flex;
+  flex-wrap: nowrap;
+  height: -webkit-fill-available;
+  height: calc(100vh - 56px) !important;
+  max-height: calc(100vh - 56px) !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.row {
+  --bs-gutter-x: 0rem !important;
+}
+
+.col-contenedor {
+  display: flex;
+  flex-direction: column;
+}
+
+.elemento-inferior {
+  margin-top: auto;
+}

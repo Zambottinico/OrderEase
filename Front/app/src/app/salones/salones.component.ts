@@ -50,7 +50,6 @@ export class SalonesComponent {
   seleccionarSalon(_t10: Salon) {
     this.salon = this.mesasService.getMesas(_t10.id);
     this.id = _t10.id;
-    console.log(this.salon);
   }
   restaurant: Restaurant;
   SeleccionarMesa(y: number, j: number) {

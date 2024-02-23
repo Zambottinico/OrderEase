@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <div class="col-lg-4 bg-light text-dark">
+  <div class="row main">
+    <div class="col-4 bg-light text-dark shadow">
       <h1>id: {{ id }}</h1>
       <label for="titleInmput" class="col-sm-2 col-form-label">Nombre:</label>
       <input
@@ -42,29 +42,27 @@
         >Este campo es requerido</label
       >
     </div>
-    <div class="col-lg-8">
+    <div class="col-8 d-flex col-contenedor">
       <ul class="nav nav-tabs">
-        <div>
-          <ul class="nav nav-tabs">
-            <li class="nav-item" *ngFor="let salon of restaurant.salones">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                [routerLink]="['/EditarSalon/', salon.id]"
-                (click)="seleccionarSalon(salon)"
-              >
-                {{ salon.name }}
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link active" (click)="agregarSalon()">+</a>
-            </li>
-          </ul>
-        </div>
+        <li class="nav-item" *ngFor="let salon of restaurant.salones">
+          <a
+            class="nav-link link-dark"
+            aria-current="page"
+            [routerLink]="['/EditarSalon/', salon.id]"
+            (click)="seleccionarSalon(salon)"
+            ngClass="{{ salon.id === id ? 'active' : '' }}"
+          >
+            {{ salon.name }}
+          </a>
+        </li>
+        <li class="nav-item btn-agregar">
+          <a class="nav-link link-success bi bi-plus" (click)="agregarSalon()"
+            >+</a
+          >
+        </li>
       </ul>
 
-      <div class="container">
+      <div class="container pt-2">
         <div class="cuadricula">
           <div
             *ngFor="let fila of salon.tableroDeMesas; let i = index"
@@ -88,11 +86,11 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
+      <div class="row elemento-inferior mb-3">
+        <div class="col d-flex justify-content-center">
           <input type="button" value="Cancelar" class="btn btn-danger" />
         </div>
-        <div class="col">
+        <div class="col d-flex justify-content-center">
           <input type="submit" value="Confirmar" class="btn btn-success" />
         </div>
       </div>

@@ -1,6 +1,6 @@
 /* mesas.component.css */
 .container {
-  max-width: 50%;
+  max-width: 40%;
 }
 
 .cuadricula {
@@ -56,4 +56,9 @@
 .OcupadaMesa:hover {
   background-color: #ebcf35 !important;
   cursor: pointer;
+}
+@media screen and (max-width: 1000px) {
+  .container {
+    max-width: 100%;
+  }
 }
