@@ -1,7 +1,7 @@
 <form action="" [formGroup]="form" class="p-3" (ngSubmit)="onSubmit()">
-  <h1>Registrar nuevo producto</h1>
+  <h1>Registrar nuevo Cliente</h1>
   <div class="row">
-    <div class="col-6">
+    <div class="col-5">
       <input
         type="text"
         class="form-control form-name mr-3 ml-3"
@@ -10,71 +10,79 @@
         formControlName="name"
         [ngClass]="{
           'is-invalid': form.get('name')?.invalid && form.get('name')?.touched,
-          'is-valid': form.get('name')?.valid && form.get('name')?.touched
+          'is-valid': form.get('name')?.valid
         }"
       />
       <label
         for=""
         *ngIf="
-            form.get('name')?.touched &&
-            form.get('name')?.errors?.['minlength']
-          "
+              form.get('name')?.touched &&
+              form.get('name')?.errors?.['minlength']
+            "
         class="text-danger"
         >Minimo 3 caracteres</label
       >
       <label
         for=""
         *ngIf="
-            form.get('name')?.touched &&
-            form.get('name')?.errors?.['maxlength']
-          "
+              form.get('name')?.touched &&
+              form.get('name')?.errors?.['maxlength']
+            "
         class="text-danger"
         >Maximo 30 caracteres</label
       >
       <label
         for=""
         *ngIf="
-            form.get('name')?.touched &&
-            form.get('name')?.errors?.['required']
-          "
+              form.get('name')?.touched &&
+              form.get('name')?.errors?.['required']
+            "
         class="text-danger"
         >Este campo es requerido</label
       >
     </div>
-    <div class="col-3">
+    <div class="col-5">
       <input
-        type="number"
+        type="text"
         class="form-control form-name mr-3 ml-3"
-        id="priceInput"
-        formControlName="price"
-        min="0"
+        id="lastNameInput"
+        formControlName="lastName"
+        placeholder="Apellido"
         [ngClass]="{
           'is-invalid':
-            form.get('price')?.invalid && form.get('price')?.touched,
-          'is-valid': form.get('price')?.valid && form.get('price')?.touched
+            form.get('lastName')?.invalid && form.get('lastName')?.touched,
+          'is-valid': form.get('lastName')?.valid
         }"
       />
-
       <label
         for=""
         *ngIf="
-              form.get('price')?.touched &&
-              form.get('price')?.errors?.['min']
+              form.get('lastName')?.touched &&
+              form.get('lastName')?.errors?.['minlength']
             "
         class="text-danger"
-        >El precio minimo es de $0</label
+        >Minimo 3 caracteres</label
       >
       <label
         for=""
         *ngIf="
-              form.get('price')?.touched &&
-              form.get('price')?.errors?.['required']
+              form.get('lastName')?.touched &&
+              form.get('lastName')?.errors?.['maxlength']
+            "
+        class="text-danger"
+        >Maximo 30 caracteres</label
+      >
+      <label
+        for=""
+        *ngIf="
+              form.get('lastName')?.touched &&
+              form.get('lastName')?.errors?.['required']
             "
         class="text-danger"
         >Este campo es requerido</label
       >
     </div>
-    <div class="col-3">
+    <div class="col-2">
       <input type="submit" value="Crear" class="btn btn-success" />
     </div>
   </div>
@@ -93,17 +101,17 @@
         <th
           class="user-select-none btn-accion"
           scope="col"
-          (click)="sortPrice()"
+          (click)="sortLastName()"
         >
-          Precio <i class="bi bi-caret-down-fill"></i>
+          Apellido <i class="bi bi-caret-down-fill"></i>
         </th>
         <th class="user-select-none" scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of clients">
         <td>{{ product.name }}</td>
-        <td>{{ product.price | currency }}</td>
+        <td>{{ product.lastName }}</td>
         <td>
           <button
             class="btn btn-success"
@@ -194,13 +202,13 @@
           <thead>
             <tr>
               <th scope="col">Nombre</th>
-              <th scope="col">Precio</th>
+              <th scope="col">Apellido</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{{ productSelected.name }}</td>
-              <td>{{ productSelected.price | currency }}</td>
+              <td>{{ clientSelected.name }}</td>
+              <td>{{ clientSelected.lastName }}</td>
             </tr>
           </tbody>
         </table>
@@ -238,7 +246,7 @@
           (ngSubmit)="onSubmitEdit()"
         >
           <div class="row">
-            <div class="col-6">
+            <div class="col-5">
               <input
                 type="text"
                 class="form-control form-name mr-3 ml-3"
@@ -249,15 +257,56 @@
                   'is-invalid':
                     formEdit.get('name')?.invalid &&
                     formEdit.get('name')?.touched,
-                  'is-valid':
-                    formEdit.get('name')?.valid && formEdit.get('name')?.touched
+                  'is-valid': formEdit.get('name')?.valid
                 }"
               />
               <label
                 for=""
                 *ngIf="
-                    formEdit.get('name')?.touched &&
-                    formEdit.get('name')?.errors?.['minlength']
+                      formEdit.get('name')?.touched &&
+                      formEdit.get('name')?.errors?.['minlength']
+                    "
+                class="text-danger"
+                >Minimo 3 caracteres</label
+              >
+              <label
+                for=""
+                *ngIf="
+                      formEdit.get('name')?.touched &&
+                      formEdit.get('name')?.errors?.['maxlength']
+                    "
+                class="text-danger"
+                >Maximo 30 caracteres</label
+              >
+              <label
+                for=""
+                *ngIf="
+                      formEdit.get('name')?.touched &&
+                      formEdit.get('name')?.errors?.['required']
+                    "
+                class="text-danger"
+                >Este campo es requerido</label
+              >
+            </div>
+            <div class="col-5">
+              <input
+                type="string"
+                class="form-control form-name mr-3 ml-3"
+                id="lastNameInput"
+                formControlName="lastName"
+                placeholder="Apellido"
+                [ngClass]="{
+                  'is-invalid':
+                    formEdit.get('lastName')?.invalid &&
+                    formEdit.get('lastName')?.touched,
+                  'is-valid': formEdit.get('lastName')?.valid
+                }"
+              />
+              <label
+                for=""
+                *ngIf="
+                    form.get('lastName')?.touched &&
+                    form.get('lastName')?.errors?.['minlength']
                   "
                 class="text-danger"
                 >Minimo 3 caracteres</label
@@ -265,8 +314,8 @@
               <label
                 for=""
                 *ngIf="
-                    formEdit.get('name')?.touched &&
-                    formEdit.get('name')?.errors?.['maxlength']
+                    form.get('lastName')?.touched &&
+                    form.get('lastName')?.errors?.['maxlength']
                   "
                 class="text-danger"
                 >Maximo 30 caracteres</label
@@ -274,50 +323,14 @@
               <label
                 for=""
                 *ngIf="
-                    formEdit.get('name')?.touched &&
-                    formEdit.get('name')?.errors?.['required']
+                    form.get('lastName')?.touched &&
+                    form.get('lastName')?.errors?.['required']
                   "
                 class="text-danger"
                 >Este campo es requerido</label
               >
             </div>
-            <div class="col-3">
-              <input
-                type="number"
-                class="form-control form-name mr-3 ml-3"
-                id="priceInput"
-                formControlName="price"
-                min="0"
-                [ngClass]="{
-                  'is-invalid':
-                    formEdit.get('price')?.invalid &&
-                    formEdit.get('price')?.touched,
-                  'is-valid':
-                    formEdit.get('price')?.valid &&
-                    formEdit.get('price')?.touched
-                }"
-              />
-
-              <label
-                for=""
-                *ngIf="
-                      formEdit.get('price')?.touched &&
-                      formEdit.get('price')?.errors?.['min']
-                    "
-                class="text-danger"
-                >El precio minimo es de $0</label
-              >
-              <label
-                for=""
-                *ngIf="
-                      formEdit.get('price')?.touched &&
-                      formEdit.get('price')?.errors?.['required']
-                    "
-                class="text-danger"
-                >Este campo es requerido</label
-              >
-            </div>
-            <div class="col-3">
+            <div class="col-2">
               <input
                 type="submit"
                 value="Actualizar"

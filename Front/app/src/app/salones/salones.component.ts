@@ -13,6 +13,8 @@ import { Restaurant } from '../models/Restaurant';
 import { Salon } from '../models/Salon';
 import { DiningTableState } from '../models/DiningTableState.enum';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { Client } from '../models/Client';
+import { ClientsService } from '../clients.service';
 
 @Component({
   selector: 'app-salones',

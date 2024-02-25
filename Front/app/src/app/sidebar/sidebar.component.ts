@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { MesasService } from '../mesas.service';
+import { Client } from '../models/Client';
+import { ClientsService } from '../clients.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +18,7 @@ import { MesasService } from '../mesas.service';
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
+  clients: Client[] = [];
   @Output() emiter = new EventEmitter();
   addPeople(people: number) {
     if (people === -1 && this.form.get('people')?.value === 1) {
@@ -27,6 +30,7 @@ export class SidebarComponent {
     }
   }
   onSubmit() {
+    console.log(this.form.value);
     let rta = this.mesasService.occupyTable(this.form, this.idLounge, this.id);
     rta.subscribe((data) => {
       if (data) {
@@ -39,7 +43,14 @@ export class SidebarComponent {
   @Input() id: number;
   @Input() idLounge: number;
 
-  constructor(private fb: FormBuilder, private mesasService: MesasService) {
+  constructor(
+    private fb: FormBuilder,
+    private mesasService: MesasService,
+    private clientService: ClientsService
+  ) {
+    this.clientService.getClients().subscribe((data) => {
+      this.clients = data;
+    });
     this.form = this.fb.group({
       people: [1, [Validators.required, Validators.min(1)]],
       client: ['', [Validators.required]],

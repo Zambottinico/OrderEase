@@ -1,5 +1,6 @@
 package bar.back.services.impl;
 
+import bar.back.dtos.PostProductoDto;
 import bar.back.dtos.ProductDto;
 import bar.back.entities.Product;
 import bar.back.repositories.ProductJpaRepository;
@@ -18,11 +19,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ModelMapper modelMapper;
     @Override
-    public ProductDto createProduct(ProductDto dto) {
+    public ProductDto createProduct(PostProductoDto dto) {
         Product product = modelMapper.map(dto,Product.class);
         productJpaRepository.save(product);
-        dto.setId(product.getId());
-        return dto;
+        return modelMapper.map(product,ProductDto.class);
     }
 
     @Override

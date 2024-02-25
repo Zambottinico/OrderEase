@@ -1,44 +1,95 @@
 <main>
-  <div
-    class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-    style="width: 280px"
-  >
-    <a
-      href="/"
-      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-    >
-      <svg class="bi me-2" width="40" height="32">
-        <use xlink:href="#bootstrap" />
-      </svg>
-      <span class="fs-4">Panel de Control</span>
-    </a>
-    <hr />
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#home" />
-          </svg>
-          Productos
+  <div class="row">
+    <div class="col-3">
+      <div
+        class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark menu"
+        style="width: 100%; height: calc(100vh - 56px) !important"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
+          <span class="fs-4">Panel de Control</span>
         </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#speedometer2" />
-          </svg>
-          Clientes
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#table" />
-          </svg>
-          Empleados
-        </a>
-      </li>
-    </ul>
-    <hr />
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a
+              routerLink="Productos"
+              class="nav-link text-white"
+              aria-current="page"
+              ngClass="{{ opcionSelected === 'Productos' ? 'active' : '' }}"
+              (click)="opcionSelected = 'Productos'"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-cart-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+                />
+              </svg>
+              Productos
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="Clientes"
+              class="nav-link text-white"
+              ngClass="{{ opcionSelected === 'Clientes' ? 'active' : '' }}"
+              (click)="opcionSelected = 'Clientes'"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-people-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"
+                />
+              </svg>
+              Clientes
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="Empleados"
+              class="nav-link text-white"
+              ngClass="{{ opcionSelected === 'Empleados' ? 'active' : '' }}"
+              (click)="opcionSelected = 'Empleados'"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-person-workspace"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"
+                />
+                <path
+                  d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"
+                />
+              </svg>
+              Empleados
+            </a>
+          </li>
+        </ul>
+        <hr />
+      </div>
+    </div>
+
+    <div class="col-9">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </main>

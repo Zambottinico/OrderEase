@@ -1,5 +1,6 @@
 package bar.back.controllers;
 
+import bar.back.dtos.PostProductoDto;
 import bar.back.dtos.ProductDto;
 import bar.back.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ProductController{
     private ProductService productService;
 
     @PostMapping("product/Create")
-    public ResponseEntity<ProductDto> CreateProduct(@RequestBody ProductDto dto){
+    public ResponseEntity<ProductDto> CreateProduct(@RequestBody PostProductoDto dto){
         return  ResponseEntity.ok(productService.createProduct(dto));
     }
 

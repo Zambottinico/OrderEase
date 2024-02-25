@@ -43,13 +43,20 @@ mesa:{{ id }}| salon: {{ idLounge }}
       <select
         class="form-select"
         formControlName="client"
+        aria-label="Default select example"
         [ngClass]="{
           'is-invalid':
             form.get('client')?.invalid && form.get('client')?.touched,
           'is-valid': form.get('client')?.valid && form.get('client')?.touched
         }"
       >
-        <option class="form-control" value="1">consumidor final</option>
+        <option
+          class="form-control"
+          *ngFor="let client of clients"
+          [value]="client.id"
+        >
+          {{ client.name }} {{ client.lastName }}
+        </option>
       </select>
     </div>
   </div>
