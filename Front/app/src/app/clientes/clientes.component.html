@@ -1,7 +1,7 @@
 <form action="" [formGroup]="form" class="p-3" (ngSubmit)="onSubmit()">
   <h1>Registrar nuevo Cliente</h1>
   <div class="row">
-    <div class="col-5">
+    <div class="col-sm-5 mb-2">
       <input
         type="text"
         class="form-control form-name mr-3 ml-3"
@@ -41,7 +41,7 @@
         >Este campo es requerido</label
       >
     </div>
-    <div class="col-5">
+    <div class="col-sm-5 mb-2">
       <input
         type="text"
         class="form-control form-name mr-3 ml-3"
@@ -82,8 +82,8 @@
         >Este campo es requerido</label
       >
     </div>
-    <div class="col-2">
-      <input type="submit" value="Crear" class="btn btn-success" />
+    <div class="col-sm-2 mb-2">
+      <input type="submit" value="Crear" class="btn btn-success btn-crear" />
     </div>
   </div>
 </form>
@@ -113,7 +113,7 @@
         @if (clients.length>0) {
         <td>{{ product.name }}</td>
         <td>{{ product.lastName }}</td>
-        <td>
+        <td class="col-accion">
           <button
             class="btn btn-success"
             (click)="onSelected(product)"

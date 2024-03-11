@@ -95,7 +95,7 @@
         <td>{{ detail.quantity }}</td>
         <td>{{ detail.product }}</td>
         <td>{{ detail.subtotal | currency }}</td>
-        @if (detail.comment != '') {
+        @if (detail.comment != '' && detail.comment != null) {
         <td
           class="ojo"
           data-bs-toggle="collapse"

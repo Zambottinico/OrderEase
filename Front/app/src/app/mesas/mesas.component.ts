@@ -44,12 +44,19 @@ export class MesasComponent {
   // mesas: Mesa[][] = new Array(10).fill([]).map(() => new Array(10));
   salon: Salon;
   id: number = 0; //Salon seleccionado
+  showSuccessAlert: boolean = false;
+
   onSubmit() {
     if (this.form.valid) {
       this.mesasService
         .editarSalon(this.salon.tableroDeMesas, this.id, this.form.value.name)
         .subscribe((data) => {
-          alert('Editado');
+          this.showSuccessAlert = true;
+
+          // Ocultar el alerta después de 3 segundos (3000 milisegundos)
+          setTimeout(() => {
+            this.showSuccessAlert = false;
+          }, 3000);
         });
     } else {
       this.form.markAllAsTouched();

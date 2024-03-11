@@ -11,3 +11,11 @@
 .btn-accion:active {
   background-color: rgb(226, 223, 223);
 }
+@media screen and (max-width: 580px) {
+  .col-accion > * {
+    padding: 2px !important;
+  }
+  .btn-crear {
+    width: 100% !important;
+  }
+}

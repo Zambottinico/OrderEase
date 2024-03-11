@@ -68,6 +68,9 @@
   .container {
     max-width: 95%;
   }
+  .fixed-bottom {
+    width: 50% !important;
+  }
 }
 
 .main {
@@ -107,4 +110,26 @@
 }
 .trash-disabled {
   color: gray;
+}
+.alert.fixed-bottom {
+  position: fixed;
+  width: 30%;
+  margin: 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fadeInOut {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fadeInOut.ng-enter {
+  opacity: 0;
+}
+
+.fadeInOut.ng-enter-active {
+  opacity: 1;
 }

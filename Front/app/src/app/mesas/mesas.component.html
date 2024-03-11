@@ -65,7 +65,7 @@
                     (input)="cambiarNombreMesa(i, j, $event)"
                   />
                 </div>
-                <div class="col-2">
+                <div class="col-2 d-flex justify-content-center">
                   <i
                     class="bi bi-trash-fill fs-4"
                     (click)="agregarMesa(i, j)"
@@ -137,6 +137,10 @@
     </div>
   </div>
 </form>
-<div class="alert alert-success" role="alert">
-  A simple success alert—check it out!
+<div
+  class="alert alert-success fixed-bottom"
+  role="alert"
+  *ngIf="showSuccessAlert"
+>
+  Salon editado con exito!
 </div>
