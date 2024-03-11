@@ -64,7 +64,16 @@
         class="form-control"
         formControlName="comment"
         placeholder="Comentario"
+        [ngClass]="{
+          'is-invalid': form.get('comment')?.invalid,
+        }"
       ></textarea>
+      <label
+        for=""
+        class="text-danger"
+        *ngIf="form.get('comment')?.errors?.['maxlength']"
+        >Maximo 256 caracteres</label
+      >
     </div>
   </div>
   <div class="form-group row mt-2">
@@ -85,7 +94,7 @@
       <tr>
         <td>{{ detail.quantity }}</td>
         <td>{{ detail.product }}</td>
-        <td>{{ detail.id }}</td>
+        <td>{{ detail.subtotal | currency }}</td>
         @if (detail.comment != '') {
         <td
           class="ojo"
@@ -104,7 +113,7 @@
         <td class="trash">
           <i
             class="bi bi-trash-fill text-danger fs-4"
-            (click)="onDelete(detail)"
+            (click)="onDelete(detail.id)"
           ></i>
         </td>
         <br />

@@ -15,7 +15,8 @@ public interface OrderService {
 
 
     @Transactional
-    boolean AddDetail(DetailDto dto);
+    OrderDetailDto AddDetail(DetailDto dto);
+    boolean deleteDetail(Long id);
 
     List<OrderDetailDto> GetDetails(Long idLounge, Long idTable);
 }

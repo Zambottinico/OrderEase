@@ -31,7 +31,7 @@ export class PedidoComponent {
     this.form = this.fb.group({
       product: ['', [Validators.required]],
       quantity: [1, [Validators.required, Validators.min(1)]],
-      comment: [''],
+      comment: ['', [Validators.maxLength(256)]],
     });
   }
 
@@ -56,11 +56,17 @@ export class PedidoComponent {
           comment: this.form.get('comment')?.value,
         })
         .subscribe((data) => {
-          alert(data);
+          this.details.push(data);
+          this.form.reset();
+          this.form.get('quantity')?.setValue(1);
         });
     }
   }
-  onDelete(detail: GetDetailDto) {}
+  onDelete(detail: number) {
+    this.orderService.deleteDetail(detail).subscribe((data) => {
+      this.details = this.details.filter((d) => d.id !== detail);
+    });
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['id'] && this.id != undefined) {
       this.ProductService.getProducts().subscribe((data) => {

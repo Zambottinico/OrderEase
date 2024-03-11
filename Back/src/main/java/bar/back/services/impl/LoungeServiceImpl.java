@@ -45,7 +45,7 @@ public class LoungeServiceImpl implements LoungeService {
             // Crear la mesa y agregarla al array bidimensional
             DiningTable mesa = new DiningTable();
             mesa.setState(DiningTableState.NOT_EXIST);
-            mesa.setName("Mesa "+id);
+            mesa.setName(id.toString());
             mesa.setId(id);
             arrayBidimensional[fila][columna] = mesa;
         }

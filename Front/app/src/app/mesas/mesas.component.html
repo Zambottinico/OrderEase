@@ -41,6 +41,45 @@
         class="text-danger"
         >Este campo es requerido</label
       >
+      <div class="lista-mesas">
+        <h2>Mesas</h2>
+
+        <div
+          *ngFor="let fila of salon.tableroDeMesas; let i = index"
+          class="no-visible"
+        >
+          <div *ngFor="let mesa of fila; let j = index" class="no-visible">
+            <ng-container
+              *ngIf="
+                mesa.state === DiningTableState.OPEN ||
+                mesa.state === DiningTableState.OCCUPIED
+              "
+            >
+              <div class="row">
+                <div class="col-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ mesa.name }}"
+                    maxlength="2"
+                    (input)="cambiarNombreMesa(i, j, $event)"
+                  />
+                </div>
+                <div class="col-2">
+                  <i
+                    class="bi bi-trash-fill fs-4"
+                    (click)="agregarMesa(i, j)"
+                    [ngClass]="{
+                      'trash-active': mesa.state === DiningTableState.OPEN,
+                      'trash-disabled': mesa.state === DiningTableState.OCCUPIED
+                    }"
+                  ></i>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-8 d-flex col-contenedor">
       <ul class="nav nav-tabs">
@@ -80,7 +119,7 @@
                     OcupadaMesa: mesa.state === DiningTableState.OCCUPIED
                   }"
                 >
-                  <h5 class="card-title">{{ mesa.id }}</h5>
+                  <h5 class="card-title">{{ mesa.name }}</h5>
                 </div>
               </div>
             </div>
@@ -98,3 +137,6 @@
     </div>
   </div>
 </form>
+<div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+</div>

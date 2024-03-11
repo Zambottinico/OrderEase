@@ -19,10 +19,14 @@ public class OrderController {
     private OrderService orderService;
 
     @PutMapping("order/AddDetail/")
-    public ResponseEntity<Boolean> AddDetail(@RequestBody DetailDto dto) throws JsonProcessingException {
+    public ResponseEntity<OrderDetailDto> AddDetail(@RequestBody DetailDto dto) throws JsonProcessingException {
         return  ResponseEntity.ok(orderService.AddDetail(dto));
     }
 
+    @DeleteMapping("order/{id}")
+    public ResponseEntity<Boolean> deleteDetail(@PathVariable Long id){
+        return ResponseEntity.ok(orderService.deleteDetail(id));
+    }
     @GetMapping("order/getDetails/{idLounge}/{idTable}")
     public ResponseEntity<List<OrderDetailDto>> getDetails(@PathVariable Long idLounge,@PathVariable Long idTable){
         return ResponseEntity.ok(orderService.GetDetails(idLounge,idTable));

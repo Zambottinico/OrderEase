@@ -8,8 +8,11 @@ import { GetDetailDto } from './models/getDetailDto';
   providedIn: 'root',
 })
 export class OrderService {
-  addDetail(detail: AddDetailDto): Observable<boolean> {
-    return this.http.put<boolean>(
+  deleteDetail(detail: number) {
+    return this.http.delete(`http://localhost:8086/order/${detail}`);
+  }
+  addDetail(detail: AddDetailDto): Observable<GetDetailDto> {
+    return this.http.put<GetDetailDto>(
       'http://localhost:8086/order/AddDetail/',
       detail
     );

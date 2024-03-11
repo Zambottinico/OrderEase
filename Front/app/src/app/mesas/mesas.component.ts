@@ -14,6 +14,7 @@ import { DiningTableState } from '../models/DiningTableState.enum';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -24,9 +25,19 @@ import {
 
   templateUrl: './mesas.component.html',
   styleUrl: './mesas.component.css',
-  imports: [CommonModule, RouterOutlet, RouterModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterOutlet,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
 })
 export class MesasComponent {
+  cambiarNombreMesa(_t28: number, _t33: number, $event: any) {
+    console.log(_t28, _t33, $event.target.value);
+    this.salon.tableroDeMesas[_t28][_t33].name = $event.target.value;
+  }
   form: FormGroup<any>;
   public DiningTableState = DiningTableState;
   restaurant: Restaurant;
@@ -35,11 +46,11 @@ export class MesasComponent {
   id: number = 0; //Salon seleccionado
   onSubmit() {
     if (this.form.valid) {
-      this.mesasService.editarSalon(
-        this.salon.tableroDeMesas,
-        this.id,
-        this.form.value.name
-      );
+      this.mesasService
+        .editarSalon(this.salon.tableroDeMesas, this.id, this.form.value.name)
+        .subscribe((data) => {
+          alert('Editado');
+        });
     } else {
       this.form.markAllAsTouched();
       console.log('error');
@@ -68,6 +79,7 @@ export class MesasComponent {
   }
 
   agregarMesa(i: number, j: number) {
+    console.log(i, j);
     if (
       this.salon.tableroDeMesas[i][j].state !== DiningTableState.OPEN &&
       this.salon.tableroDeMesas[i][j].state !== DiningTableState.OCCUPIED

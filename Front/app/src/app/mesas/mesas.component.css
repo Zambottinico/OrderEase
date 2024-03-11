@@ -91,3 +91,20 @@
 .elemento-inferior {
   margin-top: auto;
 }
+.no-visible {
+  padding: 0px !important;
+}
+.lista-mesas {
+  overflow-y: scroll;
+  max-height: 80%;
+}
+.trash-active {
+  cursor: pointer;
+  color: #dc3545 !important;
+}
+.trash-active:hover {
+  color: rgb(255, 148, 148) !important;
+}
+.trash-disabled {
+  color: gray;
+}

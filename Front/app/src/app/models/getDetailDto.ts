@@ -3,4 +3,5 @@ export class GetDetailDto {
   product: string;
   quantity: number;
   comment: string;
+  subtotal: number;
 }

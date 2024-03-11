@@ -7,6 +7,7 @@ import bar.back.entities.Client;
 import bar.back.entities.DetailOrder;
 import bar.back.entities.OrderEntity;
 import bar.back.repositories.ClientJpaRepository;
+import bar.back.repositories.OrderDetailJpaRepository;
 import bar.back.repositories.OrderJpaRepository;
 import bar.back.repositories.ProductJpaRepository;
 import bar.back.services.OrderService;
@@ -14,6 +15,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +28,8 @@ public class OrderServiceImpl implements OrderService {
     private ClientJpaRepository clientJpaRepository;
     @Autowired
     private ProductJpaRepository productJpaRepository;
+    @Autowired
+    private OrderDetailJpaRepository orderDetailJpaRepository;
     @Override
     public void CreateOrder(OccupyTableDto dto) {
         OrderEntity orderEntity = new OrderEntity();
@@ -43,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public boolean AddDetail(DetailDto dto) {
+    public OrderDetailDto AddDetail(DetailDto dto) {
         Optional<OrderEntity> optionalOrder = orderJpaRepository.findByAvailableTrueAndIdLoungeAndIdTable(dto.getIdLounge(), dto.getIdTable());
         if (optionalOrder.isPresent()) {
             OrderEntity orderEntity = optionalOrder.get();
@@ -56,6 +60,21 @@ public class OrderServiceImpl implements OrderService {
             orderEntity.getDetails().add(detailOrder);
             orderJpaRepository.save(orderEntity);
 
+            OrderDetailDto rta = new OrderDetailDto();
+            rta.setProduct(detailOrder.getProduct().getName());
+            rta.setQuantity(detailOrder.getQuantity());
+            rta.setId(detailOrder.getId());
+            rta.setComment(detailOrder.getComment());
+            rta.setSubtotal(detailOrder.getProduct().getPrice().multiply(BigDecimal.valueOf(rta.getQuantity())));
+            return rta;
+        }
+        return null;
+    }
+@Override
+    public boolean deleteDetail(Long id){
+        DetailOrder detailOrder = orderDetailJpaRepository.getReferenceById(id);
+        if (detailOrder.getId()!=null){
+            orderDetailJpaRepository.deleteById(id);
             return true;
         }
         return false;
@@ -73,6 +92,7 @@ public class OrderServiceImpl implements OrderService {
                 dto.setQuantity(detail.getQuantity());
                 dto.setProduct(detail.getProduct().getName());
                 dto.setId(detail.getId());
+                dto.setSubtotal(detail.getProduct().getPrice().multiply(BigDecimal.valueOf(dto.getQuantity())));
                 orderDetailDtoList.add(dto);
             }
             return orderDetailDtoList;

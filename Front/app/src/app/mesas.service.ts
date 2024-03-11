@@ -28,7 +28,7 @@ export class MesasService {
     return this.restaurant;
   }
 
-  editarSalon(mesas: Mesa[][], id: number, name: string) {
+  editarSalon(mesas: Mesa[][], id: number, name: string): Observable<Salon> {
     console.log(id);
     const dto = new EditarSalonDto(id, name, mesas);
     let rta = this.http.put<Salon>(
@@ -38,6 +38,7 @@ export class MesasService {
     rta.subscribe((data) => {
       this.GetSalones();
     });
+    return rta;
   }
   /* agregarMesa(i: number, j: number) {
     this.mesas[i][j].state = this.mesas[i][j].state ? false : true;
