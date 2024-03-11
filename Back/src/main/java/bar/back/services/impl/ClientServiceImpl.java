@@ -53,14 +53,14 @@ public class ClientServiceImpl implements ClientService {
         if (client!=null){
             return modelMapper.map(client,ClientDto.class);
         }
-        throw new Exception("No existe client con id "+ id);
+        return null;
     }
 
     @Override
     public List<ClientDto> getClients() throws Exception {
         List<Client> clientList = clientJpaRepository.findAll();
         List<ClientDto> dtoList = new ArrayList<>();
-        if (clientList.get(0)!=null){
+        if (!clientList.isEmpty()){
             for (Client p:clientList) {
                 if (p!=null){
                     ClientDto dto =modelMapper.map(p,ClientDto.class);
@@ -69,6 +69,6 @@ public class ClientServiceImpl implements ClientService {
             }
             return dtoList;
         }
-        throw new Exception("No hay clientes");
+         return null;
     }
 }

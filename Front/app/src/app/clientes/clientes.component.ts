@@ -106,7 +106,21 @@ export class ClientesComponent {
         ],
       }),
     });
+  }
 
+  constructor(private clientService: ClientsService) {}
+
+  ngOnInit() {
+    this.clientSelected = new Client(0, '', '');
+
+    this.clientService.getClients().subscribe((data) => {
+      this.clients = data;
+      if (this.clients) {
+        this.clientSelected = this.clients[0];
+      }
+
+      this.initForms();
+    });
     this.formEdit = new FormGroup({
       id: new FormControl(this.clientSelected.id),
       name: new FormControl(this.clientSelected.name, {
@@ -123,14 +137,6 @@ export class ClientesComponent {
           Validators.maxLength(30),
         ],
       }),
-    });
-  }
-
-  constructor(private clientService: ClientsService) {
-    this.clientService.getClients().subscribe((data) => {
-      this.clients = data;
-      this.clientSelected = this.clients[0];
-      this.initForms();
     });
   }
 }

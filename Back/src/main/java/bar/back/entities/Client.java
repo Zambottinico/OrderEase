@@ -3,7 +3,7 @@ package bar.back.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,4 +14,7 @@ public class Client {
     private Long id;
     private String name;
     private String lastName;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<OrderEntity> orderEntities;
 }

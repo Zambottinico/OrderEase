@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,4 +15,7 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<DetailOrder> detailsOrders;
 }

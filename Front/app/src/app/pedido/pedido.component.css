@@ -1,0 +1,19 @@
+.ojo:hover > * {
+  color: rgb(115, 238, 115) !important;
+  cursor: pointer;
+}
+.no-comments {
+  color: rgb(128, 128, 128) !important;
+}
+.trash:hover > * {
+  color: rgb(255, 148, 148) !important;
+  cursor: pointer;
+}
+.table1 > :not(caption) > * > * {
+  background-color: rgb(240, 242, 243) !important;
+  border-bottom: rgb(222, 226, 230);
+}
+.table1 {
+  background-color: rgb(240, 242, 243) !important;
+  border-bottom: rgb(222, 226, 230);
+}

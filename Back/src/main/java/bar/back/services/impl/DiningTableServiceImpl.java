@@ -7,6 +7,7 @@ import bar.back.entities.DiningTableState;
 import bar.back.entities.Lounge;
 import bar.back.repositories.LoungeJpaRepository;
 import bar.back.services.DiningTableService;
+import bar.back.services.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ import java.io.IOException;
 public class DiningTableServiceImpl implements DiningTableService {
     @Autowired
     private LoungeJpaRepository loungeJpaRepository;
+    @Autowired
+    private OrderService orderService;
     @Override
     public Boolean occupyTable(OccupyTableDto dto) {
         Lounge lounge= loungeJpaRepository.getById(dto.getIdLounge());
@@ -32,9 +35,10 @@ public class DiningTableServiceImpl implements DiningTableService {
                         arrayBidimensional[i][j].setIdClient(dto.getIdClient());
                         lounge.setTableroDeMesas(arrayBidimensional);
                         String arrayBidimensionalJSON = objectMapper.writeValueAsString(arrayBidimensional);
-
+                        orderService.CreateOrder(dto);
                         lounge.setTableroDeMesasJSON(arrayBidimensionalJSON);
                         loungeJpaRepository.save(lounge);
+
                         return true;
                     }
                 }

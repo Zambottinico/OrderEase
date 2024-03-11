@@ -1,1 +1,121 @@
-mesa:{{ id }}| salon: {{ idLounge }}
+<p class="mb-0 text-secondary">Cliente: Nicolas Herrera</p>
+<p class="text-secondary">Personas: 5</p>
+<form action="" [formGroup]="form" (ngSubmit)="addDetail()">
+  <div class="form-group row mt-2">
+    <div class="col-12">
+      <select
+        class="form-select"
+        formControlName="product"
+        aria-label="Default select example"
+        [ngClass]="{
+          'is-invalid':
+            form.get('product')?.invalid && form.get('product')?.touched,
+          'is-valid': form.get('product')?.valid && form.get('product')?.touched
+        }"
+      >
+        <option
+          class="form-control"
+          *ngFor="let product of products"
+          [value]="product.id"
+        >
+          {{ product.name }} {{ product.price | currency }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <div class="col-sm-12">
+      <div class="row justify-content-center mt-1">
+        <div class="col-2">
+          <input
+            type="button"
+            value="+"
+            class="btn btn-primary"
+            (click)="addProduct(1)"
+          />
+        </div>
+        <div class="col-4">
+          <input
+            type="number"
+            class="form-control form-name mr-3 ml-3"
+            id="quantityInput"
+            formControlName="quantity"
+            min="1"
+            [ngClass]="{
+              'is-invalid': form.get('quantity')?.invalid,
+              'is-valid': form.get('quantity')?.valid
+            }"
+          />
+        </div>
+        <div class="col-3">
+          <input
+            type="button"
+            value="-"
+            class="btn btn-primary"
+            (click)="addProduct(-1)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <div class="col-12">
+      <textarea
+        class="form-control"
+        formControlName="comment"
+        placeholder="Comentario"
+      ></textarea>
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <div class="col-12">
+      <input type="submit" value="Anadir" class="btn btn-success" />
+    </div>
+  </div>
+</form>
+
+<div
+  class="accordion accordion-flush border-bottom"
+  id="accordionFlushExample"
+  *ngFor="let detail of details; let i = index"
+  [ngClass]="i % 2 == 0 ? 'table1' : 'table2'"
+>
+  <table class="table mb-0" [ngClass]="i % 2 == 0 ? 'table1' : 'table2'">
+    <tbody>
+      <tr>
+        <td>{{ detail.quantity }}</td>
+        <td>{{ detail.product }}</td>
+        <td>{{ detail.id }}</td>
+        @if (detail.comment != '') {
+        <td
+          class="ojo"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#flush-collapseOne-' + i"
+          aria-expanded="false"
+          [attr.aria-controls]="'flush-collapseOne-' + i"
+        >
+          <i class="bi bi-chat-dots text-success fs-4 ojo"></i>
+        </td>
+
+        }@else {
+        <td class="no-comments fs-4 text-muted"><i class="bi bi-chat"></i></td>
+        }
+
+        <td class="trash">
+          <i
+            class="bi bi-trash-fill text-danger fs-4"
+            (click)="onDelete(detail)"
+          ></i>
+        </td>
+        <br />
+      </tr>
+    </tbody>
+  </table>
+  <div
+    [attr.id]="'flush-collapseOne-' + i"
+    class="accordion-collapse collapse"
+    data-bs-parent="#accordionFlushExample"
+  >
+    <div class="accordion-body">{{ detail.comment }}</div>
+  </div>
+</div>

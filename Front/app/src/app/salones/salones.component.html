@@ -5,6 +5,9 @@
   aria-labelledby="offcanvasRightLabel"
 >
   <div class="offcanvas-header">
+    <button class="btn btn-success" *ngIf="!lastTableTouchesIsOpen">
+      <i class="bi bi-currency-dollar"></i>
+    </button>
     <h5 id="offcanvasRightLabel">Nombre restaurant</h5>
     <button
       type="button"
